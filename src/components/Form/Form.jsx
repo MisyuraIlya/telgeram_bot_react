@@ -6,6 +6,9 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [subject, setSubject] = useState('physical');
+    const {tg} = useTelegram();
+
+
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value);
@@ -18,22 +21,6 @@ const Form = () => {
     const onChangeSubjcet = (e) => {
         setSubject(e.target.value);
     }
-
-    const {tg} = useTelegram();
-
-    useEffect(() => {
-        tg.MainButton.setParams({
-            text:'sned info'
-        })
-    },[])
-
-    useEffect(() => {
-        if(!city || !country) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-        }
-    },[country, city])
 
     const onSendData = useCallback ( () => {
         const data = {
@@ -53,6 +40,24 @@ const Form = () => {
     }, [onSendData])
 
 
+
+    useEffect(() => {
+        tg.MainButton.setParams({
+            text:'send info'
+        })
+    },[])
+
+    useEffect(() => {
+        if(!city || !country) {
+            tg.MainButton.hide();
+        } else {
+            tg.MainButton.show();
+        }
+    },[country, city])
+
+
+
+
     return (
         <div className={'form'}>
             <h3>Enter information</h3>
@@ -60,8 +65,8 @@ const Form = () => {
             <input className={'input'} type="text" placeholder={'City'}   value={city} onChange={onChangeCity}/>
 
             <select className={'select'}  value={subject} onChange={onChangeSubjcet}>
-                <option value={'physical'}>Name</option>
-                <option value={'legal'}>Name</option>
+                <option value={'physical'}>1</option>
+                <option value={'legal'}>2</option>
             </select>
         </div>
     );
