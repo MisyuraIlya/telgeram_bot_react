@@ -31,18 +31,18 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        if(!street || !country) {
+        if(!city || !country) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [country, street])
+    }, [country, city])
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value)
     }
 
-    const onChangeStreet = (e) => {
+    const onChangeCity = (e) => {
         setCity(e.target.value)
     }
 
@@ -55,7 +55,7 @@ const Form = () => {
         <div className={'form'}>
             <h3>Enter information</h3>
             <input className={'input'} type="text" placeholder={'Country'} value={country} onChange={onChangeCountry}/>
-            <input className={'input'} type="text" placeholder={'City'}   value={city} onChange={onChangeStreet}/>
+            <input className={'input'} type="text" placeholder={'City'}   value={city} onChange={onChangeCity}/>
 
             <select className={'select'}  value={subject} onChange={onChangeSubject}>
                 <option value={'physical'}>1</option>
