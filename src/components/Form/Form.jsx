@@ -35,7 +35,7 @@ const Form = () => {
         }
     },[country, city])
 
-    const onSendData = useCallBack ( () => {
+    const onSendData = useCallback ( () => {
         const data = {
             country,
             street,
