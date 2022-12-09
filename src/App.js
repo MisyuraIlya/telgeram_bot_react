@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React,{ useEffect } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import { useTelegram } from './hooks/useTelegram';
@@ -9,7 +9,6 @@ function App() {
 
 
   const {onToggleButton, tg} = useTelegram()
-  console.log(tg.ready)
 
   useEffect(() => {
     tg.ready();
@@ -22,7 +21,6 @@ function App() {
         <Route index element={<ProductList/>}/>
         <Route path={'/form'} element={<Form/>}/>
       </Routes>
-      {/* <button onCanPlay={onToggleButton}>toggle</button> */}
     </div>
   );
 }
