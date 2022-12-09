@@ -8,29 +8,14 @@ const Form = () => {
     const [subject, setSubject] = useState('physical');
     const {tg} = useTelegram();
 
-
-
-    const onChangeCountry = (e) => {
-        setCountry(e.target.value);
-    }
-
-    const onChangeCity = (e) => {
-        setCity(e.target.value);
-    }
-
-    const onChangeSubjcet = (e) => {
-        setSubject(e.target.value);
-    }
-
-    const onSendData = useCallback ( () => {
+    const onSendData = useCallback(() => {
         const data = {
             country,
-            street,
+            city,
             subject
         }
-
-        tg.sendData(JSON.stringify(data))
-    },[country, city, subject])
+        tg.sendData(JSON.stringify(data));
+    }, [country, city, subject])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -39,32 +24,40 @@ const Form = () => {
         }
     }, [onSendData])
 
-
-
     useEffect(() => {
         tg.MainButton.setParams({
-            text:'send info'
+            text: 'Отправить данные'
         })
-    },[])
+    }, [])
 
     useEffect(() => {
-        if(!city || !country) {
+        if(!street || !country) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    },[country, city])
+    }, [country, street])
 
+    const onChangeCountry = (e) => {
+        setCountry(e.target.value)
+    }
 
+    const onChangeStreet = (e) => {
+        setCity(e.target.value)
+    }
+
+    const onChangeSubject = (e) => {
+        setSubject(e.target.value)
+    }
 
 
     return (
         <div className={'form'}>
             <h3>Enter information</h3>
             <input className={'input'} type="text" placeholder={'Country'} value={country} onChange={onChangeCountry}/>
-            <input className={'input'} type="text" placeholder={'City'}   value={city} onChange={onChangeCity}/>
+            <input className={'input'} type="text" placeholder={'City'}   value={city} onChange={onChangeStreet}/>
 
-            <select className={'select'}  value={subject} onChange={onChangeSubjcet}>
+            <select className={'select'}  value={subject} onChange={onChangeSubject}>
                 <option value={'physical'}>1</option>
                 <option value={'legal'}>2</option>
             </select>
